@@ -8,7 +8,12 @@ export interface SignInStatus {
     message: string;
     token: string;
     errors: [string];
-  }
+  };
+}
+
+export interface SignInInput {
+  email: string;
+  password: string;
 }
 
 @Injectable({

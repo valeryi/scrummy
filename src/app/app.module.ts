@@ -1,27 +1,25 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
+import { GraphQLModule } from './graphql.module';
+import { MaterialModule } from './_helpers/material/material.module';
+
+import { RegisteredGuard } from './auth/registered.guard';
+import { AuthModule } from './auth/auth.module';
+
+import { LoadingInterceptorService } from './_helpers/loading-indicator/loading-interceptor.service';
+import { LoadingIndicatorComponent } from './_helpers/loading-indicator/loading-indicator.component';
+
 import { AppComponent } from './app.component';
 import { WordCategoryComponent } from './word-category/word-category.component';
 import { VocabularComponent } from './vocabular/vocabular.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { ReactiveFormsModule } from '@angular/forms';
-import { GraphQLModule } from './graphql.module';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { AuthModule } from './auth/auth.module';
-import { CommonModule } from '@angular/common';
-import { LoadingIndicatorComponent } from './_helpers/loading-indicator/loading-indicator.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MaterialModule } from './_helpers/material/material.module';
-import { MatProgressBarModule } from '@angular/material/progress-bar';
-import { LoadingInterceptorService } from './_helpers/loading-indicator/loading-interceptor.service';
-import { LoadingIndicatorService } from './_helpers/loading-indicator/loading-indicator.service';
-import { RegisteredGuard } from './auth/registered.guard';
 
-
-// TODO: Loading component interacting with Router and HTTP requests (custom)
 
 @NgModule({
   declarations: [
@@ -33,6 +31,7 @@ import { RegisteredGuard } from './auth/registered.guard';
     LoadingIndicatorComponent,
   ],
   imports: [
+    CommonModule,
     BrowserModule,
     AppRoutingModule,
     GraphQLModule,

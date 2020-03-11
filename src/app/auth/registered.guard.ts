@@ -1,6 +1,6 @@
 import { Injectable, OnDestroy } from '@angular/core';
-import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router } from '@angular/router';
-import { Observable, Subscription } from 'rxjs';
+import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { AuthService } from './auth.service';
 
 @Injectable({
@@ -16,7 +16,7 @@ export class RegisteredGuard implements CanActivate, OnDestroy {
     private router: Router
   ) {
 
-    this.subscription$ = this.authService.isSignedIn.subscribe(state => this.signedIn = state);
+    this.subscription$ = this.authService.auth.subscribe(state => this.signedIn = state);
 
   }
 

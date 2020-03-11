@@ -1,7 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { AuthService } from '../auth.service';
-import { emailMatch, passwordFormat, passwordsMatch } from '../../_helpers/custom-validation';
+import { passwordFormat, passwordsMatch, emailFormat } from '../../_helpers/custom-validation';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-sign-up',
@@ -20,7 +21,7 @@ export class SignUpComponent implements OnInit, OnDestroy {
     lastname: ['', Validators.required],
   });
 
-  email = ['', [Validators.required, emailMatch]];
+  email = ['', [Validators.required, emailFormat]];
 
   password = this.fb.group({
     pwd: ['', [Validators.required, Validators.minLength(7), passwordFormat]],
@@ -44,7 +45,7 @@ export class SignUpComponent implements OnInit, OnDestroy {
 
   }
 
-  onSubmit(e) {
+  onSubmit(e): void {
     e.preventDefault();
 
     this.submitted = true;
@@ -62,18 +63,18 @@ export class SignUpComponent implements OnInit, OnDestroy {
       this.authService.signUp(SignUpInput);
 
       this.onReset();
+      this.submitted = false;
     }
   }
 
-  onReset() {
+  onReset(): void {
     this.signUpForm.reset();
-    this.submitted = false;
   }
 
   ngOnDestroy(): void {
     if (this.subscriptions$.length > 0) {
 
-      this.subscriptions$.forEach(sub => sub.unsubscribe());
+      this.subscriptions$.forEach((sub: Subscription) => sub.unsubscribe());
     }
   }
 }

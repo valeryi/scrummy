@@ -63,8 +63,8 @@
             <small *ngIf="f.email.errors && f.email.errors.required"
               >Email is required</small
             >
-            <small *ngIf="f.email.errors && f.email.errors.custom">{{
-              f.email.errors.custom
+            <small *ngIf="f.email.errors && f.email.errors.InvalidEmail">{{
+              f.email.errors.InvalidEmail
             }}</small>
           </span>
         </div>

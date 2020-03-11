@@ -10,12 +10,12 @@ import { Subscription } from 'rxjs';
 export class ToolbarComponent implements OnInit, OnDestroy {
 
   isSignedIn: boolean;
-  subscriptions$: [Subscription] = [new Subscription];
+  subscriptions$: [Subscription] = [new Subscription()];
 
   constructor(
     private authService: AuthService
   ) {
-    const isSignedIn = this.authService.isSignedIn.subscribe(state => this.isSignedIn = state);
+    const isSignedIn = this.authService.auth.subscribe(state => this.isSignedIn = state);
 
     this.subscriptions$.push(isSignedIn);
   }

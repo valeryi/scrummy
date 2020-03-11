@@ -1,46 +1,56 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { SignInMutation } from './sign-in.graphql';
-import { SignUpMutation } from './sign-up.graphql';
+import { SignInMutation, SignInInput } from './sign-in.graphql';
+import { SignUpMutation, SignUpInput } from './sign-up.graphql';
 import { BehaviorSubject } from 'rxjs';
+import { tap } from 'rxjs/operators';
 
-// TODO: To learn is observable is unsubscribed in services automatically. In Classes there is an Inteface OnDestroy for that
+// TODO: To learn if observable is unsubscribed in services automatically. In Classes there is an Inteface OnDestroy for that
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  isSignedIn: BehaviorSubject<boolean> = new BehaviorSubject(false);
+  auth: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
   constructor(
     private router: Router,
     private signInMutation: SignInMutation,
     private signUpMutation: SignUpMutation
-  ) { }
+  ) {
+    this.isSignedIn();
+  }
 
-  signIn(params) {
+  signIn(params: SignInInput) {
 
-    this.signInMutation.mutate(params)
-      .subscribe({
+    return this.signInMutation.mutate(params).pipe(
 
-        next: ({ data }) => {
+      tap(({ data }) => {
+
+        const signIn = data.signIn;
+        const token = signIn.token;
+
+        const { payload } = JSON.parse(atob(token.split('.')[1]));
+        const currentUser = payload.userData;
+
+        const localData = {
+          currentUser,
+          token
+        };
+
+        this.setLocalData(localData);
+
+        this.router.navigate(['/dashboard']);
+        this.auth.next(true);
 
 
-          const signIn = data.signIn;
-
-          localStorage.setItem('token', signIn.token);
-          this.router.navigate(['/dashboard']);
-          this.isSignedIn.next(true);
-
-        },
-
-        error: console.log
-      });
+      })
+    );
 
   }
 
-  signUp(SignUpInput) {
+  signUp(SignUpInput: SignUpInput) {
 
     this.signUpMutation.mutate({ SignUpInput })
       .subscribe({
@@ -50,17 +60,49 @@ export class AuthService {
 
   }
 
-  signOut() {
-    localStorage.removeItem('token');
-    this.router.navigate(['/']);
-    this.isSignedIn.next(false);
+  private getLocalData(name: string): null | object | string {
+    const data = localStorage.getItem(name);
+    if (!data) { return null; }
+
+    if (/^(\{).*(\})$/i.test(data)) {
+      return JSON.parse(data);
+    } else {
+      return data;
+    }
   }
 
-  // isSignedIn(): boolean {
-  //   const token = localStorage.getItem('token');
+  private setLocalData(data: object) {
 
-  //   if (token) {
-  //     return true;
-  //   }
-  // }
+    for (const key in data) {
+      if (data.hasOwnProperty(key)) {
+        const value = data[key];
+
+        if (typeof value === 'object') {
+          localStorage.setItem(key, JSON.stringify(data[key]));
+        } else {
+          localStorage.setItem(key, data[key]);
+        }
+
+      }
+    }
+
+  }
+
+  signOut() {
+    localStorage.removeItem('token');
+    localStorage.removeItem('currentUser');
+    this.router.navigate(['/']);
+    this.auth.next(false);
+  }
+
+  private isSignedIn() {
+    const token = this.getLocalData('token') as string;
+    const checkFormat = (token && token.split('.').length === 3) ? true : null;
+
+    if (token && checkFormat) {
+      this.auth.next(true);
+    }
+
+  }
+
 }

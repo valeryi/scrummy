@@ -20,7 +20,7 @@ export function passwordFormat(control: AbstractControl): { [key: string]: strin
   return { passwordFormat: 'Should consist of characters, symbols and numbers' };
 }
 
-export function emailMatch(control: AbstractControl): { [key: string]: string } | null {
+export function emailFormat(control: AbstractControl): { [key: string]: string } | null {
 
   const pattern = new RegExp(/.+\@.+\..+/, 'i');
 
@@ -28,7 +28,7 @@ export function emailMatch(control: AbstractControl): { [key: string]: string } 
     return null;
   }
 
-  return { custom: `Invalid Email Address` };
+  return { invalidEmail: `Invalid Email Address` };
 }
 
 // export function passwordsMatch(params: any): ValidatorFn {

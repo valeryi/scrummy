@@ -17,15 +17,29 @@
             name="email"
             placeholder="Email"
             formControlName="email"
+            required
           />
-          <!-- <span *ngIf="submitted && signupForm.invalid" class="error-messages">
-            <small *ngIf="f.email.errors && f.email.errors.required"
-              >Email is required</small
+          <span *ngIf="submitted && signInForm.invalid" class="error-messages">
+            <small
+              *ngIf="
+                signInForm.controls.email.errors &&
+                signInForm.controls.email.errors.required
+              "
+              >You should use your acount email address to sign in</small
             >
-            <small *ngIf="f.email.errors && f.email.errors.custom">{{
-              f.email.errors.custom
-            }}</small>
-          </span> -->
+            <small
+              *ngIf="
+                signInForm.controls.email.errors &&
+                signInForm.controls.email.errors.invalidEmail &&
+                signInForm.controls.email.value.length
+              "
+              >{{ signInForm.controls.email.errors.invalidEmail }}</small
+            >
+          </span>
+
+          <ul *ngIf="!submitted && errors.length > 0">
+            <li *ngFor="let error of errors">{{ error }}</li>
+          </ul>
         </div>
       </fieldset>
 
@@ -39,38 +53,17 @@
             formControlName="pwd"
             required
           />
+
+          <span *ngIf="submitted && signInForm.invalid" class="error-messages">
+            <small
+              *ngIf="
+                signInForm.controls.pwd.errors &&
+                signInForm.controls.pwd.errors.required
+              "
+              >You should use your password</small
+            >
+          </span>
         </div>
-
-        <!-- <span *ngIf="submitted && signupForm.invalid" class="error-messages">
-            <small
-              *ngIf="
-                password.controls.pwd.errors &&
-                password.controls.pwd.errors.required
-              "
-              >Password is required</small
-            >
-
-            <small
-              *ngIf="
-                password.controls.pwd.errors &&
-                (password.controls.pwd.errors.minlength ||
-                  password.controls.pwd.value.length === 0)
-              "
-              >Too short password
-            </small>
-
-            <small *ngIf="password.errors && password.errors.custom">{{
-              password.errors.custom
-            }}</small>
-
-            <small
-              *ngIf="
-                password.controls.pwd.errors &&
-                password.controls.pwd.errors.passwordFormat
-              "
-              >{{ password.controls.pwd.errors.passwordFormat }}</small
-            >
-          </span> -->
       </fieldset>
 
       <button id="submit-signin">Sign In</button>
