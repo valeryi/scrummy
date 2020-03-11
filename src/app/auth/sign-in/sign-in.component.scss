@@ -1,0 +1,65 @@
+@import "../../../scss/variables.scss";
+
+.wrapper-signin {
+  display: flex;
+  height: 100vh;
+  width: 100%;
+
+  .design-side {
+    background-color: blue;
+  }
+
+  .signin-side {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .signin-form {
+    border: 1px solid rgba($color: #333, $alpha: 0.9);
+    // border-radius: 7px;
+    // box-shadow: -5px 0 10px 0 rgba($color: #333, $alpha: 0.1), 5px 0 10px 0 rgba($color: #333, $alpha: 0.1),
+    //   0 5px 10px 0 rgba($color: #333, $alpha: 0.1);
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    fieldset {
+      margin-bottom: 15px;
+      padding: 10px;
+      border: none;
+    }
+
+    .input-group {
+      display: flex;
+      flex-direction: column;
+
+      padding: 5px;
+
+      .error-messages {
+        display: flex;
+        flex-direction: column;
+        padding: 5px 0;
+
+        small {
+          padding: 2px 0;
+          color: $primary;
+        }
+      }
+
+      input {
+        padding: 5px;
+        font-size: 1em;
+      }
+    }
+
+    #submit-signin {
+      width: 88%;
+      height: 30px;
+    }
+  }
+}

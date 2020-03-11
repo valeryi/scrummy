@@ -1,0 +1,46 @@
+<div class="wrapper">
+  <table class="table">
+    <caption>
+      Category
+    </caption>
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Name</th>
+        <th>Words</th>
+        <th>Statistics</th>
+        <th>Position</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        *ngFor="
+          let category of filteredCategories;
+          let i = index;
+          let odd = odd
+        "
+        [ngClass]="{ odd: odd }"
+        [id]="category.id"
+      >
+        <td>{{ i + 1 }}</td>
+        <td class="table-name">{{ category.name }}</td>
+        <td>100</td>
+        <td>{{ category.stat.frenquency }}</td>
+        <td>{{ category.position }}</td>
+
+        <!-- BUTTONS -->
+        <td class="table-buttons">
+          <i class="fa fa-trash" aria-hidden="true"></i>
+        </td>
+        <td class="table-buttons">
+          <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+        </td>
+        <td class="table-buttons">
+          <i class="fa fa-arrows" aria-hidden="true"></i>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <button (click)="sortBy('name')">Sort</button>
+</div>

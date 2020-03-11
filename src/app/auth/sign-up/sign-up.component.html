@@ -1,0 +1,130 @@
+<div class="wrapper-signup">
+  <div class="design-side">
+    <h4>Left side with some design</h4>
+  </div>
+  <div class="signup-side">
+    <form
+      class="signup-form"
+      autocomplete="false"
+      [formGroup]="signUpForm"
+      (ngSubmit)="onSubmit($event)"
+    >
+      <fieldset formGroupName="name">
+        <legend>Name</legend>
+        <div class="input-group">
+          <input
+            type="text"
+            name="firstname"
+            placeholder="First Name"
+            formControlName="firstname"
+            required
+          />
+          <span *ngIf="submitted && signUpForm.invalid" class="error-messages">
+            <small
+              *ngIf="
+                name.controls.firstname.errors &&
+                name.controls.firstname.errors.required
+              "
+              >First name is required</small
+            >
+          </span>
+        </div>
+
+        <div class="input-group">
+          <input
+            type="text"
+            name="lastname"
+            placeholder="Last Name"
+            formControlName="lastname"
+            required
+          />
+          <span *ngIf="submitted && signUpForm.invalid" class="error-messages">
+            <small
+              *ngIf="
+                name.controls.lastname.errors &&
+                name.controls.lastname.errors.required
+              "
+              >Last name is required</small
+            >
+          </span>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Email</legend>
+        <div class="input-group">
+          <input
+            type="email"
+            name="email"
+            placeholder="Email"
+            formControlName="email"
+          />
+          <span *ngIf="submitted && signUpForm.invalid" class="error-messages">
+            <small *ngIf="f.email.errors && f.email.errors.required"
+              >Email is required</small
+            >
+            <small *ngIf="f.email.errors && f.email.errors.custom">{{
+              f.email.errors.custom
+            }}</small>
+          </span>
+        </div>
+      </fieldset>
+
+      <fieldset formGroupName="password">
+        <legend>Password</legend>
+        <div class="input-group">
+          <input
+            type="password"
+            name="pws"
+            placeholder="Password"
+            formControlName="pwd"
+            required
+          />
+        </div>
+
+        <div class="input-group">
+          <input
+            type="password"
+            name="confirm"
+            placeholder="Confirm"
+            formControlName="confirm"
+            required
+          />
+
+          <span *ngIf="submitted && signUpForm.invalid" class="error-messages">
+            <small
+              *ngIf="
+                password.controls.pwd.errors &&
+                password.controls.pwd.errors.required
+              "
+              >Password is required</small
+            >
+
+            <small
+              *ngIf="
+                password.controls.pwd.errors &&
+                (password.controls.pwd.errors.minlength ||
+                  password.controls.pwd.value.length === 0)
+              "
+              >Too short password
+            </small>
+
+            <small *ngIf="password.errors && password.errors.custom">{{
+              password.errors.custom
+            }}</small>
+
+            <small
+              *ngIf="
+                password.controls.pwd.errors &&
+                password.controls.pwd.errors.passwordFormat
+              "
+              >{{ password.controls.pwd.errors.passwordFormat }}</small
+            >
+          </span>
+        </div>
+      </fieldset>
+
+      <button id="submit-signup">Sign Up</button>
+    </form>
+  </div>
+</div>

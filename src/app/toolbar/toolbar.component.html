@@ -1,0 +1,21 @@
+<div class="wrapper">
+  <div id="logo-wrapper">
+    <span>
+      Flashcards
+    </span>
+  </div>
+
+  <ul class="main-nav" *ngIf="isSignedIn">
+    <li><a routerLink="/dashboard">Home</a></li>
+    <li><a>Catalogues</a></li>
+    <li><a>Users</a></li>
+  </ul>
+
+  <ul class="profile-nav">
+    <li *ngIf="!isSignedIn"><a routerLink="/signUp">Sign Up</a></li>
+    <li *ngIf="!isSignedIn"><a routerLink="/signIn">Sign In</a></li>
+    <li *ngIf="isSignedIn"><a (click)="signOut()">Sign Out</a></li>
+  </ul>
+
+  <span id="profile-icon"><a>A</a></span>
+</div>

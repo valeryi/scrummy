@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { LoadingIndicatorService } from './_helpers/loading-indicator/loading-indicator.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'flashcarder';
+
+  constructor(private loading: LoadingIndicatorService) {
+
+  }
 }

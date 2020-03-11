@@ -1,0 +1,52 @@
+.wrapper {
+  // border: 1px solid #bc261b;
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.draggable-ghost {
+  opacity: 0.2;
+}
+
+.table {
+  border: 1px solid green;
+  width: 300px;
+  border-radius: 20px;
+  padding: 5px 10px;
+  // border-collapse: collapse;
+
+  .table-name {
+    text-align: left;
+    max-width: 550px;
+  }
+
+  .table-buttons {
+    min-width: 50px;
+  }
+
+  td {
+    text-align: center;
+    padding: 0px 10px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+
+  tbody > tr:hover {
+    background-color: rgba($color: #000000, $alpha: 0.2);
+    cursor: pointer;
+  }
+
+  tr {
+    // border: none;
+    height: 30px;
+  }
+
+  .odd {
+    background-color: hotpink;
+  }
+}

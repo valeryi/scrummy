@@ -1,0 +1,79 @@
+<div class="wrapper-signin">
+  <div class="design-side">
+    <h4>Left side with some design</h4>
+  </div>
+  <div class="signin-side">
+    <form
+      class="signin-form"
+      autocomplete="false"
+      [formGroup]="signInForm"
+      (ngSubmit)="onSubmit($event)"
+    >
+      <fieldset>
+        <legend>Email</legend>
+        <div class="input-group">
+          <input
+            type="email"
+            name="email"
+            placeholder="Email"
+            formControlName="email"
+          />
+          <!-- <span *ngIf="submitted && signupForm.invalid" class="error-messages">
+            <small *ngIf="f.email.errors && f.email.errors.required"
+              >Email is required</small
+            >
+            <small *ngIf="f.email.errors && f.email.errors.custom">{{
+              f.email.errors.custom
+            }}</small>
+          </span> -->
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Password</legend>
+        <div class="input-group">
+          <input
+            type="password"
+            name="pwd"
+            placeholder="Password"
+            formControlName="pwd"
+            required
+          />
+        </div>
+
+        <!-- <span *ngIf="submitted && signupForm.invalid" class="error-messages">
+            <small
+              *ngIf="
+                password.controls.pwd.errors &&
+                password.controls.pwd.errors.required
+              "
+              >Password is required</small
+            >
+
+            <small
+              *ngIf="
+                password.controls.pwd.errors &&
+                (password.controls.pwd.errors.minlength ||
+                  password.controls.pwd.value.length === 0)
+              "
+              >Too short password
+            </small>
+
+            <small *ngIf="password.errors && password.errors.custom">{{
+              password.errors.custom
+            }}</small>
+
+            <small
+              *ngIf="
+                password.controls.pwd.errors &&
+                password.controls.pwd.errors.passwordFormat
+              "
+              >{{ password.controls.pwd.errors.passwordFormat }}</small
+            >
+          </span> -->
+      </fieldset>
+
+      <button id="submit-signin">Sign In</button>
+    </form>
+  </div>
+</div>
