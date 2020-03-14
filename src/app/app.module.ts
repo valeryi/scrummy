@@ -20,6 +20,9 @@ import { VocabularComponent } from './vocabular/vocabular.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 
+import { UsersModule } from './users/users.module';
+import { UsersRoutingModule } from './users/users-routing.module';
+
 
 @NgModule({
   declarations: [
@@ -28,7 +31,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     VocabularComponent,
     ToolbarComponent,
     DashboardComponent,
-    LoadingIndicatorComponent,
+    LoadingIndicatorComponent
   ],
   imports: [
     CommonModule,
@@ -39,6 +42,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     AuthModule,
     BrowserAnimationsModule,
     MaterialModule,
+    UsersModule
   ],
   providers: [
     RegisteredGuard,

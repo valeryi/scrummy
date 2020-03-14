@@ -10,7 +10,7 @@ const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    redirectTo: '/signIn'
+    redirectTo: '/users'
   },
   {
     path: 'signIn',
@@ -19,6 +19,11 @@ const routes: Routes = [
   {
     path: 'signUp',
     component: SignUpComponent
+  },
+  {
+    path: 'users',
+    loadChildren: () => import('./users/users.module').then(m => m.UsersModule),
+    canActivate: [RegisteredGuard]
   },
   {
     path: 'dashboard',

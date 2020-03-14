@@ -1,0 +1,34 @@
+<div class="wrapper">
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">First</th>
+        <th scope="col">Last</th>
+        <th scope="col">Email</th>
+        <th scope="col">Confirmed</th>
+        <th scope="col">Role</th>
+        <th scope="col">Edit</th>
+        <th scope="col">Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of filteredUsers; let i = index">
+        <th scope="row">{{ i + 1 }}</th>
+        <td>{{ user.firstName }}</td>
+        <td>{{ user.lastName }}</td>
+        <td>{{ user.email }}</td>
+        <td>{{ user.confirmed }}</td>
+        <td>{{ user.role }}</td>
+        <td><button (click)="onEdit()">edit</button></td>
+        <td><button (click)="onDelete(user)">delete</button></td>
+      </tr>
+    </tbody>
+    <input
+      type="text"
+      placeholder="Look for ..."
+      style="width: 100%;"
+      [formControl]="tableSearch"
+    />
+  </table>
+</div>

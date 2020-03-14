@@ -91,16 +91,21 @@ export class AuthService {
   signOut() {
     localStorage.removeItem('token');
     localStorage.removeItem('currentUser');
-    this.router.navigate(['/']);
+    this.router.navigate(['/signIn']);
     this.auth.next(false);
   }
 
   private isSignedIn() {
     const token = this.getLocalData('token') as string;
-    const checkFormat = (token && token.split('.').length === 3) ? true : null;
 
-    if (token && checkFormat) {
-      this.auth.next(true);
+    if (token) {
+      const checkFormat = (token.split('.').length === 3) ? true : null;
+      const payload = JSON.parse(atob(token.split('.')[1]));
+      const diff = Math.floor(Date.now() / 1000) - payload.iat;
+
+      if (checkFormat && (diff <= 59 * 60)) {
+        this.auth.next(true);
+      }
     }
 
   }
